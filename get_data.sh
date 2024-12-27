@@ -1,6 +1,41 @@
 mkdir -p ./download/
 mkdir -p ./simulations/input/
 
+#
+# BYLOT field data
+#
+pushd download
+if [ ! -e "BylotDensity2014.csv" ]; then
+    curl -o density_profile_2014.zip https://nordicana.cen.ulaval.ca/donnees/n_45693/v601717/ds_000601811.zip
+    unzip density_profile_2014.zip BylotDensity2014.csv
+    rm density_profile_2014.zip
+fi
+if [ ! -e "BylotDensity2015.csv" ]; then
+    curl -o density_profile_2015.zip https://nordicana.cen.ulaval.ca/donnees/n_45693/v601717/ds_000601815.zip
+    unzip density_profile_2015.zip BylotDensity2015.csv
+    rm density_profile_2015.zip
+fi
+if [ ! -e "BylotDensity2017.csv" ]; then
+    curl -o density_profile_2017.zip https://nordicana.cen.ulaval.ca/donnees/n_45693/v601717/ds_000601819.zip
+    unzip density_profile_2017.zip BylotDensity2017.csv
+    rm density_profile_2017.zip
+fi
+if [ ! -e "BylotDensity2018.csv" ]; then
+    curl -o density_profile_2018.zip https://nordicana.cen.ulaval.ca/donnees/n_45693/v601717/ds_000601823.zip
+    unzip density_profile_2018.zip BylotDensity2018.csv
+    rm density_profile_2018.zip
+fi
+if [ ! -e "BylotDensity2019.csv" ]; then
+    curl -o density_profile_2019.zip https://nordicana.cen.ulaval.ca/donnees/n_45693/v601717/ds_000601827.zip
+    unzip density_profile_2019.zip BylotDensity2019.csv
+    rm density_profile_2019.zip
+fi
+popd
+
+
+#
+# BYLOT meteo data
+#
 pushd download
 if [ ! -e "Bylot_driving_dataV2.csv" ]; then
     curl -o bylot.zip "https://nordicana.cen.ulaval.ca/donnees/n_45693/v601717/ds_000601795.zip"
@@ -25,7 +60,7 @@ echo "COORDPARAM  = 17X" >> ${inifile}
 echo "TIME_ZONE   = 0" >> ${inifile}
 echo "METEO = CSV" >> ${inifile}
 echo "METEOPATH = ./download/" >> ${inifile}
-echo "METEOFILE1 = Bylot_driving_dataV2.csv" >> ${inifile}
+echo "STATION1 = Bylot_driving_dataV2.csv" >> ${inifile}
 echo "POSITION1 = latlon ${latitude} ${longitude} ${altitude}" >> ${inifile}
 echo "CSV1_NAME = ${stnname}" >> ${inifile}
 echo "CSV1_ID = ${stnid}" >> ${inifile}
