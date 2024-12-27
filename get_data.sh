@@ -1,5 +1,5 @@
 mkdir -p ./download/
-mkdir -p ./smet/
+mkdir -p ./simulations/input/
 
 pushd download
 if [ ! -e "Bylot_driving_dataV2.csv" ]; then
@@ -41,7 +41,7 @@ echo "COORDSYS = UTM" >> ${inifile}
 echo "COORDPARAM = 17X" >> ${inifile}
 echo "TIME_ZONE = 0" >> ${inifile}
 echo "METEO = SMET" >> ${inifile}
-echo "METEOPATH = ./smet/" >> ${inifile}
+echo "METEOPATH = ./simulations/input/" >> ${inifile}
 
 meteoio_timeseries -c ./download/io.ini -b ${startTime} -e ${endTime} -s 60
 rm ./download/io.ini
