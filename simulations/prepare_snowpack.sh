@@ -67,7 +67,7 @@ do
 	WriteIniFile
 
 	> to_exec.lst
-	for run in "default" "redeposit"; do
+	for run in "default" "polar" "redeposit"; do
 		echo "IMPORT_BEFORE = ./io_${stnid}.ini" > ./iofiles/io_${stnid}_${run}.ini
 		echo "IMPORT_AFTER  = ./io_${run}.ini" >> ./iofiles/io_${stnid}_${run}.ini
 		echo "snowpack -c ./iofiles/io_${stnid}_${run}.ini -b ${profiledate} -e NOW > log/${stnid}_${run}.log 2>&1" >> to_exec.lst
