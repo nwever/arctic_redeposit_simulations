@@ -1,6 +1,7 @@
 # Create required directories
 mkdir -p ./input/
 mkdir -p ./output/
+mkdir -p ./output_sensitivity_study/
 mkdir -p ./log/
 
 # Create *sno file
@@ -69,7 +70,21 @@ do
 	> to_exec.lst
 	for run in "default" "polar" "redeposit"; do
 		echo "IMPORT_BEFORE = ./io_${stnid}.ini" > ./iofiles/io_${stnid}_${run}.ini
-		echo "IMPORT_AFTER  = ./io_${run}.ini" >> ./iofiles/io_${stnid}_${run}.ini
+		echo "IMPORT_BEFORE = ./io_${run}.ini" >> ./iofiles/io_${stnid}_${run}.ini
 		echo "snowpack -c ./iofiles/io_${stnid}_${run}.ini -b ${profiledate} -e NOW > log/${stnid}_${run}.log 2>&1" >> to_exec.lst
+
+		if [[ "${run}" == "redeposit" ]]; then
+			for fetch_length in 1 2 3 5 10 20
+			do
+				echo "IMPORT_BEFORE = ./io_${stnid}.ini" > ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini
+				echo "IMPORT_BEFORE = ./io_${run}.ini" >> ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini
+				echo "[Output]" >> ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini
+				echo "EXPERIMENT = redeposit_fl_${fetch_length}" >> ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini
+				echo "METEOPATH = ./output_sensitivity_study" >> ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini
+				echo "[SnowpackAdvanced]" >> ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini
+				echo "SNOW_EROSION_FETCH_LENGTH = ${fetch_length}" >> ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini
+				echo "snowpack -c ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini -b ${profiledate} -e NOW > log/${stnid}_${run}_fl_${fetch_length}.log 2>&1" >> to_exec.lst
+			done
+		fi
 	done
 done
