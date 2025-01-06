@@ -1,3 +1,7 @@
+mkdir -p ./postprocess/
+mkdir -p ./postprocess_sensitivity_study/
+mkdir -p ./plots/
+
 # This script doesn't consider possible surface hoar when plotting gt
 > main_postprocess_to_exec.lst
 
