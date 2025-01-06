@@ -68,12 +68,13 @@ do
 	WriteIniFile
 
 	> to_exec.lst
-	for run in "default" "polar" "redeposit"; do
+	for run in "default" "polar" "redeposit" "redeposit_vt"; do
 		echo "IMPORT_BEFORE = ./io_${stnid}.ini" > ./iofiles/io_${stnid}_${run}.ini
 		echo "IMPORT_BEFORE = ./io_${run}.ini" >> ./iofiles/io_${stnid}_${run}.ini
 		echo "snowpack -c ./iofiles/io_${stnid}_${run}.ini -b ${profiledate} -e NOW > log/${stnid}_${run}.log 2>&1" >> to_exec.lst
 
 		if [[ "${run}" == "redeposit" ]]; then
+			# Setup sensitivity study
 			for fetch_length in 1 2 3 5 10 20
 			do
 				echo "IMPORT_BEFORE = ./io_${stnid}.ini" > ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini

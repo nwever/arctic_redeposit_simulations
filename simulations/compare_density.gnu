@@ -1,7 +1,7 @@
-set term pdf size 10,7 font 'Helvetica,18'
+set term pdf size 10,9.333 font 'Helvetica,18'
 set datafile missing "-9999"
 set output 'plots/compare_density.pdf'
-set multiplot layout 3,1
+set multiplot layout 4,1
 load 'plot_settings'
 set cbrange[0:900]
 set palette model RGB
@@ -23,5 +23,9 @@ pl '<(tail -n+2 postprocess/BYL_polar_rho.dat | tac)' matrix with image notitle
 set title 'SNOWPACK redeposit mode'
 set label 100 "(c)" at graph -0.05, graph 1.12 center front tc "#000000" font "Helvetica,24"
 pl '<(tail -n+2 postprocess/BYL_redeposit_rho.dat | tac)' matrix with image notitle
+
+set title 'SNOWPACK redeposit mode with vapour transport'
+set label 100 "(d)" at graph -0.05, graph 1.12 center front tc "#000000" font "Helvetica,24"
+pl '<(tail -n+2 postprocess/BYL_redeposit_vt_rho.dat | tac)' matrix with image notitle
 
 unset multiplot
