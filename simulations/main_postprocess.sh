@@ -15,6 +15,10 @@ do
 
 	# Density
 	echo "gawk -F, -v yr=${yrange} -v res=${res} -v var=\"0502\" -f create_matrix.awk ${f} > postprocess/${g}_rho.dat" >> main_postprocess_to_exec.lst
+
+	# Grain type
+	echo "gawk -F, -v yr=${yrange} -v res=${res} -v var=\"0513\" -f create_matrix.awk ${f} > postprocess/${g}_gt.dat" >> main_postprocess_to_exec.lst
+	echo "bash extract_gt.sh ${f}" >> main_postprocess_to_exec.lst
 done
 for f in output_sensitivity_study/*pro
 do
@@ -22,6 +26,9 @@ do
 
 	# Density
 	echo "gawk -F, -v yr=${yrange} -v res=${res} -v var=\"0502\" -f create_matrix.awk ${f} > postprocess_sensitivity_study/${g}_rho.dat" >> main_postprocess_to_exec.lst
+
+	# Grain type
+	echo "gawk -F, -v yr=${yrange} -v res=${res} -v var=\"0513\" -f create_matrix.awk ${f} > postprocess/${g}_gt.dat" >> main_postprocess_to_exec.lst
 done
 
 
