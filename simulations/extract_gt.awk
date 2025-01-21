@@ -22,7 +22,9 @@ BEGIN {
                         if (gt==5) str="/\\\\"
                         if (gt==6) str="\\\\/"
                         if (gt==7) str="O"
-                        print (n, (z[i]+z[i-1])/2./0.2, str)
+                        if (gt==8) str="-"
+                        if (gt==9) str="[]O"
+                        print (n, (z[i]+z[i-1])/2./0.2, str, gt)
                     }
                 }
             }
@@ -39,7 +41,7 @@ BEGIN {
         } else if (/^0513/) {
             # Read in grain type
             for(i=3; i<=NF; i++) {
-                val[i-2]=$i
+                val[i-2+mini]=$i
             }
         }
     }
