@@ -1,0 +1,3 @@
+[submodule "simulations/snowpack"]
+	path = simulations/snowpack
+	url = https://github.com/snowpack-model/snowpack.git
