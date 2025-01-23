@@ -86,6 +86,17 @@ do
 				echo "SNOW_EROSION_FETCH_LENGTH = ${fetch_length}" >> ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini
 				echo "snowpack -c ./iofiles/io_${stnid}_${run}_fl_${fetch_length}.ini -b ${profiledate} -e NOW > log/${stnid}_${run}_fl_${fetch_length}.log 2>&1" >> to_exec.lst
 			done
+			for avg_depth in "0.0" "0.05" "0.1" "0.15" "0.2"
+			do
+				echo "IMPORT_BEFORE = ./io_${stnid}.ini" > ./iofiles/io_${stnid}_${run}_ad_${avg_depth}.ini
+				echo "IMPORT_BEFORE = ./io_${run}.ini" >> ./iofiles/io_${stnid}_${run}_ad_${avg_depth}.ini
+				echo "[Output]" >> ./iofiles/io_${stnid}_${run}_ad_${avg_depth}.ini
+				echo "EXPERIMENT = redeposit_ad_${avg_depth}" >> ./iofiles/io_${stnid}_${run}_ad_${avg_depth}.ini
+				echo "METEOPATH = ./output_sensitivity_study" >> ./iofiles/io_${stnid}_${run}_ad_${avg_depth}.ini
+				echo "[SnowpackAdvanced]" >> ./iofiles/io_${stnid}_${run}_ad_${avg_depth}.ini
+				echo "SNOW_EROSION_REDEPOSIT_AVG_DEPTH = ${avg_depth}" >> ./iofiles/io_${stnid}_${run}_ad_${avg_depth}.ini
+				echo "snowpack -c ./iofiles/io_${stnid}_${run}_ad_${avg_depth}.ini -b ${profiledate} -e NOW > log/${stnid}_${run}_ad_${avg_depth}.log 2>&1" >> to_exec.lst
+			done
 		fi
 	done
 done
