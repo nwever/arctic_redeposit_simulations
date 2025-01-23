@@ -54,3 +54,5 @@ do
 	echo "set arrow ${n} from ${xloc}, graph 0 to ${xloc}, graph 1 lc rgb 'black' lw 2 dt 2 front nohead" >> plot_settings
 	echo "set label ${n} \"${yr}  \" at ${xloc}, graph 0.9 right font ',14'" >> plot_settings
 done
+
+echo "Postprocessing commands have been prepared. Execute main_postprocess_to_exec.lst to run them all."

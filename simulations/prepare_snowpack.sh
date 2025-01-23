@@ -100,3 +100,4 @@ do
 		fi
 	done
 done
+echo "SNOWPACK simulations have been prepared. Execute to_exec.lst to run all simulations."

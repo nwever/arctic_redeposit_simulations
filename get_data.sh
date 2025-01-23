@@ -78,5 +78,5 @@ echo "TIME_ZONE = 0" >> ${inifile}
 echo "METEO = SMET" >> ${inifile}
 echo "METEOPATH = ./simulations/input/" >> ${inifile}
 
-meteoio_timeseries -c ./download/io.ini -b ${startTime} -e ${endTime} -s 60
+./simulations/usr/bin/meteoio_timeseries -c ./download/io.ini -b ${startTime} -e ${endTime} -s 60
 rm ./download/io.ini
