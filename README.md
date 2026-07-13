@@ -9,6 +9,7 @@ This repository contains the workflow to run SNOWPACK for Bylot, showing how to 
 - `meteoio_timeseries`, from [MeteoIO](https://meteoio.slf.ch).
 - [SNOWPACK](https://github.com/snowpack-model/snowpack)
 - GNU `parallel` for parallel running of simulations and postprocessing code
+- GNU `awk` (`gawk`)
 - `gnuplot` for plotting
 
 ### Compiling SNOWPACK
